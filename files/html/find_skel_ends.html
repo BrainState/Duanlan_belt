@@ -1,0 +1,300 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Introduction</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-05-18"><meta name="DC.source" content="find_skel_ends.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Introduction</h1><!--introduction--><pre>                             431-400 Year Long Project
+                         LA1 - Medical Image Processing 2003
+Supervisor     :  Dr Lachlan Andrew
+Group Members  :  Alister Fong    78629   a.fong1@ugrad.unimelb.edu.au
+                  Lee Siew Teng   102519  s.lee1@ugrad.unimelb.edu.au
+                  Loh Jien Mei    103650  j.loh1@ugrad.unimelb.edu.au</pre><pre>File and function name : find_skel_ends.m
+Version                : 1.0
+Date of completion     : 7 October 2003
+Written by    :   Alister Fong    78629   a.fong1@ugrad.unimelb.edu.au</pre><pre>Inputs        :
+             input_skeleton_image - binary image of 1 island representing the
+                                    skeleton.
+             'not testing','testing' (Optional) - Enables or disables testing mode
+                                                  (Default - 'not testing')</pre><pre>Outputs       :
+             terminating_pts - [X,Y] coordinates of where the ends of the skeleton are.</pre><pre>Description   :
+     Determines the locations of end points in the given skeleton.</pre><pre>To Run &gt;&gt; terminating_pts = find_skel_ends(input_skeleton_image)</pre><p>Example &gt;&gt; I = imread(filename);           input_skeleton_image = bwmorph(I,'thin',inf);           terminating_pts = find_skel_ends(input_skeleton_image);           figure,imshow(input_skeleton_image);           hold on; plot(terminating_pts(:,1),terminating_pts(:,2),'r*');</p><pre>                     or</pre><pre>          I = imread(filename);
+         input_skeleton_image = bwmorph(I,'thin',inf);
+         terminating_pts = find_skel_ends(input_skeleton_image,'testing');</pre><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Codes</a></li></ul></div><h2>Codes<a name="1"></a></h2><pre class="codeinput"><span class="keyword">function</span> terminating_pts = find_skel_ends(input_skeleton_image,varargin)
+
+
+option = <span class="string">'not testing'</span>;
+<span class="keyword">if</span> ~isempty(varargin)
+    <span class="keyword">for</span> n = 1:1:length(varargin)
+        <span class="keyword">if</span> strcmp(varargin{n},<span class="string">'testing'</span>) || strcmp(varargin{n},<span class="string">'not testing'</span>)
+            option = varargin{n};
+        <span class="keyword">else</span>
+            error(<span class="string">'Error in input option'</span>);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% ---------------------------------------------------------------------------------------------</span>
+<span class="comment">% ---------------------------------------------------------------------------------------------</span>
+<span class="keyword">if</span> strcmp(option,<span class="string">'testing'</span>)
+	disp(<span class="string">'Process the skeleton to find the edges of the island'</span>);
+<span class="keyword">end</span>
+<span class="comment">% ---------------------------------------------------------------------------------------------</span>
+<span class="comment">% ---------------------------------------------------------------------------------------------</span>
+<span class="comment">%Extract the relative</span>
+[Y,X] = find(input_skeleton_image ~= 0);
+skeleton_coord = [X,Y];
+terminating_pts = [];
+<span class="comment">% Relative vectors to the side borders from the current pixel</span>
+border_vector = [-1 -1;<span class="keyword">...</span>
+                  0 -1;<span class="keyword">...</span>
+                  1 -1;<span class="keyword">...</span>
+                  1  0;<span class="keyword">...</span>
+                  1  1;<span class="keyword">...</span>
+                  0  1;<span class="keyword">...</span>
+                 -1  1;<span class="keyword">...</span>
+                 -1  0];
+<span class="keyword">for</span> n = 1:1:length(skeleton_coord(:,1))
+    <span class="keyword">if</span> strcmp(option,<span class="string">'testing'</span>)
+        disp(strcat(<span class="string">'find_skel_ends :'</span>,num2str(n),<span class="string">'-of-'</span>,num2str(length(skeleton_coord(:,1)))));
+    <span class="keyword">end</span>
+    <span class="comment">%Select the current coordinate to be tested</span>
+    current_coord = skeleton_coord(n,:);
+    <span class="comment">%Determine the coordinates of the pixels around this pixel</span>
+    border_coord = [border_vector(:,1) + current_coord(1),border_vector(:,2) + current_coord(2)];
+    pos = find(ismember(border_coord,skeleton_coord,<span class="string">'rows'</span>) == 1);
+    <span class="keyword">if</span> isempty(pos)
+        <span class="comment">% If this pixel is a island, then it is an edge to a island of 1 pixel</span>
+        <span class="comment">% Save it.</span>
+        terminating_pts = [terminating_pts;current_coord];
+    <span class="keyword">else</span>
+        <span class="comment">%Default assumption: pixel is an edge unless otherwise stated</span>
+        present = 0;
+        <span class="comment">%Test all the pixels around this current pixel</span>
+        <span class="keyword">for</span> m = 1:1:length(pos);
+            <span class="comment">%For each surrounding pixel, test if there is a corresponding pixel on the other side</span>
+            continunity = [4,5,6] + pos(m);
+            g = find(continunity &gt; 8);
+            <span class="keyword">if</span> ~isempty(g)
+                continunity(g) = mod(continunity(g),9)+1;
+            <span class="keyword">end</span>
+            <span class="keyword">if</span> any(ismember(continunity',pos,<span class="string">'rows'</span>))
+                <span class="comment">% If any pixels that are on the opposite side of the current pixel</span>
+                <span class="comment">% are present then this pixel is not a terminating pixel</span>
+                present = 1;
+                <span class="keyword">break</span>;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+        <span class="comment">% If the current pixel does not fullfill the above condition, then it is an edge</span>
+        <span class="keyword">if</span> present == 0
+            terminating_pts = [terminating_pts;current_coord];
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+
+<span class="comment">% ---------------------------------------------------------------------------------------------</span>
+<span class="comment">% If testing then display the skeleton image with the detected end points</span>
+<span class="comment">% ---------------------------------------------------------------------------------------------</span>
+<span class="keyword">if</span> strcmp(option,<span class="string">'testing'</span>)
+    disp(<span class="string">'Display the terminating ends'</span>);
+	figure;
+    imshow(input_skeleton_image);
+	hold <span class="string">on</span>;
+	plot(terminating_pts(:,1),terminating_pts(:,2),<span class="string">'r*'</span>);
+    title(<span class="string">'Red points indicated detected terminal points'</span>);
+    xlabel(<span class="string">'Test mode for "find skel ends.m" function'</span>);
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Error using find_skel_ends (line 63)
+Not enough input arguments.
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Introduction
+%                               431-400 Year Long Project 
+%                           LA1 - Medical Image Processing 2003
+%  Supervisor     :  Dr Lachlan Andrew
+%  Group Members  :  Alister Fong    78629   a.fong1@ugrad.unimelb.edu.au
+%                    Lee Siew Teng   102519  s.lee1@ugrad.unimelb.edu.au
+%                    Loh Jien Mei    103650  j.loh1@ugrad.unimelb.edu.au
+% 
+%  File and function name : find_skel_ends.m
+%  Version                : 1.0
+%  Date of completion     : 7 October 2003   
+%  Written by    :   Alister Fong    78629   a.fong1@ugrad.unimelb.edu.au
+%
+%  Inputs        :  
+%               input_skeleton_image - binary image of 1 island representing the 
+%                                      skeleton.
+%               'not testing','testing' (Optional) - Enables or disables testing mode
+%                                                    (Default - 'not testing')
+%
+%  Outputs       :          
+%               terminating_pts - [X,Y] coordinates of where the ends of the skeleton are.
+%
+%  Description   : 
+%       Determines the locations of end points in the given skeleton.
+%
+%  To Run >> terminating_pts = find_skel_ends(input_skeleton_image)
+%
+% Example >> I = imread(filename);
+%           input_skeleton_image = bwmorph(I,'thin',inf);
+%           terminating_pts = find_skel_ends(input_skeleton_image);
+%           figure,imshow(input_skeleton_image);
+%           hold on; plot(terminating_pts(:,1),terminating_pts(:,2),'r*');
+%
+%                       or
+%
+%            I = imread(filename);
+%           input_skeleton_image = bwmorph(I,'thin',inf);
+%           terminating_pts = find_skel_ends(input_skeleton_image,'testing');
+%  
+%% Codes
+function terminating_pts = find_skel_ends(input_skeleton_image,varargin)
+
+
+option = 'not testing';
+if ~isempty(varargin)
+    for n = 1:1:length(varargin)
+        if strcmp(varargin{n},'testing') || strcmp(varargin{n},'not testing')
+            option = varargin{n};
+        else
+            error('Error in input option');
+        end
+    end
+end
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+if strcmp(option,'testing')
+	disp('Process the skeleton to find the edges of the island');
+end
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+%Extract the relative 
+[Y,X] = find(input_skeleton_image ~= 0);
+skeleton_coord = [X,Y];
+terminating_pts = [];
+% Relative vectors to the side borders from the current pixel
+border_vector = [-1 -1;...
+                  0 -1;...
+                  1 -1;...
+                  1  0;...
+                  1  1;...
+                  0  1;...
+                 -1  1;...
+                 -1  0];
+for n = 1:1:length(skeleton_coord(:,1))
+    if strcmp(option,'testing')
+        disp(strcat('find_skel_ends :',num2str(n),'-of-',num2str(length(skeleton_coord(:,1)))));
+    end
+    %Select the current coordinate to be tested
+    current_coord = skeleton_coord(n,:);
+    %Determine the coordinates of the pixels around this pixel
+    border_coord = [border_vector(:,1) + current_coord(1),border_vector(:,2) + current_coord(2)];
+    pos = find(ismember(border_coord,skeleton_coord,'rows') == 1);
+    if isempty(pos)
+        % If this pixel is a island, then it is an edge to a island of 1 pixel
+        % Save it.
+        terminating_pts = [terminating_pts;current_coord];
+    else
+        %Default assumption: pixel is an edge unless otherwise stated
+        present = 0;
+        %Test all the pixels around this current pixel
+        for m = 1:1:length(pos);
+            %For each surrounding pixel, test if there is a corresponding pixel on the other side
+            continunity = [4,5,6] + pos(m);
+            g = find(continunity > 8);
+            if ~isempty(g)
+                continunity(g) = mod(continunity(g),9)+1;
+            end
+            if any(ismember(continunity',pos,'rows'))
+                % If any pixels that are on the opposite side of the current pixel
+                % are present then this pixel is not a terminating pixel
+                present = 1;
+                break;
+            end
+        end
+        % If the current pixel does not fullfill the above condition, then it is an edge
+        if present == 0
+            terminating_pts = [terminating_pts;current_coord];
+        end
+    end
+end
+
+
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+% If testing then display the skeleton image with the detected end points
+% REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-
+if strcmp(option,'testing')
+    disp('Display the terminating ends');
+	figure;
+    imshow(input_skeleton_image);
+	hold on;
+	plot(terminating_pts(:,1),terminating_pts(:,2),'r*');
+    title('Red points indicated detected terminal points');
+    xlabel('Test mode for "find skel ends.m" function');
+end
+
+##### SOURCE END #####
+--></body></html>
