@@ -9,7 +9,7 @@ function [mat_pathway,fp_save,sleep_para] = batch00(fp_raw,mat_name,folder_save)
 
 % fp_save=['\\10.10.44.152\public\006_Figures\03_Test200908\',mat_name,'\']; 
 fp_save=[folder_save,'\',mat_name,'\'];
-if ~isfolder(fp_save)
+if ~exist(fp_save,'dir')
     mkdir(fp_save)
 end
 fp_mat=[fp_raw,'\' mat_name,'.mat'];

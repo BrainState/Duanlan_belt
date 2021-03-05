@@ -37,7 +37,7 @@ data_ba = [];% battery info
 clock_hour = [];
 infos={};
 
-if files.length==0 && ~isempty(files)
+if size(files,1)==0 && ~isempty(files)
     jj=1;
     fp = char(files(jj));
     [~,fn]=fileparts(fp);
@@ -54,7 +54,7 @@ if files.length==0 && ~isempty(files)
         infos = [infos,infos_];
     end
 else
-    for jj = 1:files.length
+    for jj = 1:size(files,1)
         if ~files(jj).isDirectory()
             continue;
         end

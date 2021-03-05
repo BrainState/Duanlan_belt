@@ -8,7 +8,7 @@ function [varargout] = acc2position(pathway_acc_data_or_data, varargin)
 % update: 
 % 2020-10-15, state estimate: whether stand up
 
-load('\\10.10.44.152\public\005_Data\portable_data\01_newTestData\07221820-headModel\data_headModel.mat')
+load('data_headModel.mat')
 motion2=-motion;
 v_stand=mean(motion2(:,1:3));
 

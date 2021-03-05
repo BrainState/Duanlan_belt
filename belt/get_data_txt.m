@@ -36,7 +36,7 @@ info.sr_BMI= fread(fileID,1,'int16'); % 17-18 BMI sample rate
 info.sr_battery= fread(fileID,1,'int16'); % 19-20 battery sample rate
 % 2020-09-10
 BMI_len=6;
-if sum(info.version==[0,0])==2
+if sum(info.version==[0,0]')==2
     info.sr_BMI=1.5;
     info.sr_battery=1.5;
     BMI_len=6;
