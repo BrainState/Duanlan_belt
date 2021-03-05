@@ -6,7 +6,7 @@ function data = notch(data,sr,varargin)
 
 [r,c]=size(data);
 if r>1 && c>1
-    error("The size of the data must be one dimension");
+    error('The size of the data must be one dimension');
 end
 notchHz=50; 
 
